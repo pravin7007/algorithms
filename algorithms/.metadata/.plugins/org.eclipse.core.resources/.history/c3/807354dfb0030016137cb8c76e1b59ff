@@ -1,0 +1,36 @@
+import java.util.ArrayList;
+
+
+public class permutationDups {
+
+	/**
+	 * @param args
+	 */
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		permutationNoDups perms = new permutationNoDups();
+		System.out.println(perms.getPermutations(String.valueOf(123)));
+	}
+	
+	public ArrayList<String> getPermutations(String str) {
+		ArrayList<String> result = new ArrayList<String>();
+		int len = str.length();
+		if(len==0){
+			result.add("");
+			return result;
+		}
+		for(int i=0;i<len;i++){
+			String before=str.substring(0, i);
+			String after = str.substring(i+1, len);
+			ArrayList<String> partials =  getPermutations(before + after);
+			
+			for(String s : partials){
+				result.add(str.charAt(i)+s);
+			}
+			
+		}
+		return result;
+	}
+
+}
